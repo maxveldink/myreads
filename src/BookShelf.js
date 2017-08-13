@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import Shelf from './Shelf';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class BookShelf extends Component {
-  currentlyReading() {
-    return {};
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+    moveBook: PropTypes.func.isRequired
   }
 
-  wantToRead() {
-    return {};
+  booksOnShelf(shelf) {
+    const { books } = this.props;
+    return books.filter(book => book.shelf === shelf);
   }
 
-  read() {
-    return {};
+  onSwitchShelf(book, shelf) {
+    this.props.moveBook(book, shelf);
   }
 
   render() {
@@ -25,15 +28,18 @@ class BookShelf extends Component {
           <div>
             <Shelf
               name="Currently Reading"
-              books={this.currentlyReading()}
+              books={this.booksOnShelf("currentlyReading")}
+              onSwitchShelf={(book, shelf) => this.onSwitchShelf(book, shelf)}
             />
             <Shelf
               name="Want to Read"
-              books={this.wantToRead()}
+              books={this.booksOnShelf("wantToRead")}
+              onSwitchShelf={(book, shelf) => this.onSwitchShelf(book, shelf)}
             />
             <Shelf
               name="Read"
-              books={this.read()}
+              books={this.booksOnShelf("read")}
+              onSwitchShelf={(book, shelf) => this.onSwitchShelf(book, shelf)}
             />
           </div>
         </div>
