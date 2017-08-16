@@ -2,7 +2,7 @@
 
 ## Development
 
-In order to work on this project, run a `yarn start` command (or `npm start`).
+In order to work on this project, run a `yarn install` command (or `npm install`). Afterward, to boot up a dev server, run `yarn start`.
 
 ## Production
 
