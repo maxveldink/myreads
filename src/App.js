@@ -17,14 +17,15 @@ class BooksApp extends React.Component {
   }
 
   moveBook(book, shelf) {
-    BooksAPI.update(book, shelf)
-      .then(BooksAPI.getAll()
-          .then((books) => {
-            this.setState({ books });
-          })
-      );
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf
+      this.setState(previousState => ({
+        books: previousState.books.filter(b=> b.id !== book.id).concat([book])
+      }))
+    });
   }
 
+  // TODO: Look into adding routing for a switch
   render() {
     return (
       <div className="app">

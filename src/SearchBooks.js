@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Book from './Book';
 import * as BooksAPI from './BooksAPI';
 
+// TODO: Add checking for invalid queries and make sure proper shelf is reflected
 class SearchBooks extends Component {
   state = { books: [] }
 
