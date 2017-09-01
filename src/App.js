@@ -25,7 +25,6 @@ class BooksApp extends React.Component {
     });
   }
 
-  // TODO: Look into adding routing for a switch
   render() {
     return (
       <div className="app">
