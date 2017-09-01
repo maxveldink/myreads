@@ -10,9 +10,18 @@ class SearchBooks extends Component {
   updateQuery(query) {
     const maxResults = 20;
 
+    if (query.length < 3) {
+      return;
+    }
+
     BooksAPI.search(query, maxResults)
       .then(books => {
-        this.setState({ books })
+        books.length > 0 && books.forEach((book) => {
+          BooksAPI.get(book.id).then((returnedBook) => {
+            book.shelf = returnedBook.shelf;
+            this.setState({ books });
+          });
+        });
       });
   }
 
@@ -33,7 +42,7 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {books && books.map(book => (
+            {books.length > 0 && books.map(book => (
               <li key={book.id}>
                 <Book
                   book={book}
